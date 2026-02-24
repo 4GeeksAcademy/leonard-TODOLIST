@@ -1,21 +1,17 @@
 import react, { useState, useEffect } from "react";
 import "../../styles/style.css";
-
 const TodoList = () => {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
-
   useEffect(() => {
     const savedTasks = localStorage.getItem("tasks");
     if (savedTasks) {
       setTasks(JSON.parse(savedTasks));
     }
   }, []);
-
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
-
   const addTask = (event) => {
     if (event.key === "Enter" && newTask.trim() !== "") {
       const newTasksObject = {
@@ -28,12 +24,11 @@ const TodoList = () => {
     }
   };
   const deleteTask = (taskId) => {
-    setTasks(tasks.filter((tasks) => taskId !== taskId.id));
-    console.log(`task with id ${taskId}deleted`);
+    setTasks(tasks.filter((task) => task.id !== taskId));
+    console.log(`task with id ${taskId} deleted`);
   };
-  return(
-    
-<div className="todo-container">
+  return (
+    <div className="todo-container">
       <h1 className="title">To do list</h1>
       <input
         type="text"
@@ -64,5 +59,16 @@ const TodoList = () => {
     </div>
   );
 };
+export default TodoList;
 
-export default TodoList
+
+
+
+
+
+
+
+
+
+
+
